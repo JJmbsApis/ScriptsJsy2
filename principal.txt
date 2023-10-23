@@ -27,7 +27,16 @@ for _, parte in pairs(Partes) do
   end
 end
 end
-
+local function TweenTeleport(Player, Teleport, tween_s, tweeninfo)
+if Player.Character and Player.Character:FindFirstChild('HumanoidRootPart') then
+	local  CF = CFrame.new(Teleport)
+	local Tween = tween_s:Create(Player.Character.HumanoidRootPart,tweeninfo,{CFrame=CF})
+	Tween:Play()
+	NoCollide(Player)
+	task.wait(2)
+	CanCollide(Player)
+end
+end
 --TABS
 
 local Main = DrRayLibrary.newTab("Main", "")
@@ -36,10 +45,12 @@ local Main = DrRayLibrary.newTab("Main", "")
 
 Main.newToggle("Auto Farm World 1", "Auto Farm do Mundo 1", false, function(toggleState)
 _G.AutoFarmW1 = toggleState
-
+local tween_s = game:GetService('TweenService')
+local tweeninfo = TweenInfo.new(1,Enum.EasingStyle.Linear)
+	
 while _G.AutoFarmW1 == true do
 NoCollide(Player)
-Player.Character:MoveTo(Vector3.new(107, -3, -20964))
+TweenTeleport(Player, Vector3.new(107, -3, -20964), tween_s, tweeninfo)
 wait(0.1)
 CanCollide(Player)
 game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvents"):WaitForChild("ReportReset"):FireServer()
