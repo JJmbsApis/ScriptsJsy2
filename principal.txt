@@ -1,0 +1,187 @@
+local function ObbyBike()
+local DrRayLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/DrRay-UI-Library/main/DrRay.lua"))()
+local Window = DrRayLibrary:Load("Jsy Hub - By jotinha.v2#0001 (Obby Bike)", "Default")
+
+--VARS
+_G.AutoFarmW1 = false
+local Player = game.Players.LocalPlayer
+
+--FUNCTIONS
+
+local function NoCollide(Player)
+local Character = Player.Character
+local Partes = Character:GetDescendants()
+for _, parte in pairs(Partes) do
+  if parte:IsA("BasePart") then
+   parte.CanCollide = false
+  end
+end
+end
+local function CanCollide(Player)
+local Character = Player.Character
+local Partes = Character:GetDescendants()
+for _, parte in pairs(Partes) do
+  if parte:IsA("BasePart") then
+   parte.CanCollide = true
+   Character.HumanoidRootPart.CanCollide = false
+  end
+end
+end
+
+--TABS
+
+local Main = DrRayLibrary.newTab("Main", "")
+
+--Toggles e Buttons
+
+Main.newToggle("Auto Farm World 1", "Auto Farm do Mundo 1", false, function(toggleState)
+_G.AutoFarmW1 = toggleState
+
+while _G.AutoFarmW1 == true do
+NoCollide(Player)
+Player.Character:MoveTo(Vector3.new(107, -3, -20964))
+wait(0.1)
+CanCollide(Player)
+game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvents"):WaitForChild("ReportReset"):FireServer()
+wait(0.1)
+end
+end)
+
+Window:Toggle()
+end
+local function TutasuFruit()
+local DrRayLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/DrRay-UI-Library/main/DrRay.lua"))()
+local Window = DrRayLibrary:Load("Jsy Hub - By jotinha.v2#0001 (Tutasu's Fruits)", "Default")
+
+_G.AutoFarm = false
+_G.Mobs = "string"
+_G.AutoBoss = false
+_G.Boss = "string"
+_G.AutoChest = false
+
+local Main = DrRayLibrary.newTab("Main", "")
+local Fruit = DrRayLibrary.newTab("Fruit", "")
+
+local function NoCollide(Player)
+local Character = Player.Character
+local Partes = Character:GetDescendants()
+for _, parte in pairs(Partes) do
+  if parte:IsA("BasePart") then
+   parte.CanCollide = false
+  end
+end
+end
+local function CanCollide(Player)
+local Character = Player.Character
+local Partes = Character:GetDescendants()
+for _, parte in pairs(Partes) do
+  if parte:IsA("BasePart") then
+   parte.CanCollide = true
+   Character.HumanoidRootPart.CanCollide = false
+  end
+end
+end
+local function TweenTeleport(Player, Teleport, tween_s, tweeninfo)
+if Player.Character and Player.Character:FindFirstChild('HumanoidRootPart') then
+	local  CF = CFrame.new(Teleport)
+	local Tween = tween_s:Create(Player.Character.HumanoidRootPart,tweeninfo,{CFrame=CF})
+	Tween:Play()
+	NoCollide(Player)
+	task.wait(2)
+	CanCollide(Player)
+end
+
+end
+
+local function ResetStats()
+ workspace:WaitForChild("Eventos"):WaitForChild("Resetar"):FireServer()
+end
+Main.newDropdown("Teleport", "Selecione algum lugar para teleportar!", {"Stop", "Inicial", "Buggy", "Jungle", "Deserto", "Gelo", "MarineFord", "Clean", "Mihawk", "SkyPea", "Vulcão"}, function(val)
+    local tween_s = game:GetService('TweenService')
+	local tweeninfo = TweenInfo.new(1,Enum.EasingStyle.Linear)
+	local tptable = {
+		    Inicial = Vector3.new(67, 19, 618),
+			Buggy = Vector3.new(-2667, 12, 114),
+			Jungle = Vector3.new(1760, 12, -237),
+			Deserto = Vector3.new(228, 13, 3808),
+			Gelo = Vector3.new(-1151, 21, -2992),
+			MarineFord = Vector3.new(-2251,  77, 3643),
+			Clean = Vector3.new(-3076, 15, -2419),
+			Mihawk = Vector3.new(-797, 59, 5516),
+			SkyPea = Vector3.new(3951, 495, 4107),
+			Vulcan = Vector3.new(5038, 12, 1477)
+			}
+if val ~= "Stop" then
+       if val == "Inicial" then
+		local Player = game.Players.LocalPlayer
+		TweenTeleport(Player, tptable.Inicial, tween_s, tweeninfo)
+	   elseif val == "Buggy" then
+		local Player = game.Players.LocalPlayer
+		TweenTeleport(Player, tptable.Buggy, tween_s, tweeninfo)
+	   elseif val == "Jungle" then
+		local Player = game.Players.LocalPlayer
+		TweenTeleport(Player, tptable.Jungle, tween_s, tweeninfo)
+	   elseif val == "Deserto" then
+		local Player = game.Players.LocalPlayer
+		TweenTeleport(Player, tptable.Deserto, tween_s, tweeninfo)
+	   elseif val == "Gelo" then
+		local Player = game.Players.LocalPlayer
+		TweenTeleport(Player, tptable.Gelo, tween_s, tweeninfo)
+	   elseif val == "MarineFord" then
+		local Player = game.Players.LocalPlayer
+		TweenTeleport(Player, tptable.MarineFord, tween_s, tweeninfo)
+	   elseif val == "Clean" then
+		local Player = game.Players.LocalPlayer
+		TweenTeleport(Player, tptable.Clean, tween_s, tweeninfo)
+	   elseif val == "Mihawk" then
+		local Player = game.Players.LocalPlayer
+		TweenTeleport(Player, tptable.Mihawk, tween_s, tweeninfo)
+	   elseif val == "SkyPea" then
+		local Player = game.Players.LocalPlayer
+		TweenTeleport(Player, tptable.SkyPea, tween_s, tweeninfo)
+	   elseif val == "Vulcão" then
+		local Player = game.Players.LocalPlayer
+		TweenTeleport(Player, tptable.Vulcan, tween_s, tweeninfo)
+	   end
+end
+
+end)
+
+Main.newToggle("Auto Farm Chest", "Auto Grind de Baús! (Não abuse)", false, function(toggleState)
+_G.AutoChest = toggleState
+while _G.AutoChest == true do
+for i,v in pairs(game:GetService("Workspace").Amazernamento.bau:GetDescendants()) do
+	if v.Name == "TouchInterest" and v.Parent.disponivel.Value == true then
+	v:Clone()
+	v.Parent.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+	wait(.1)
+	end
+	end	
+wait(.01)
+end
+end)
+				
+Fruit.newButton("Teleport Random Fruit NPC", "Teleporta ao NPC que gira frutas!", function()
+    local tween_s = game:GetService('TweenService')
+	local tweeninfo = TweenInfo.new(1,Enum.EasingStyle.Linear)
+	local Pos = Vector3.new(1997.9, 80.8148, -545.659)
+	local Player = game.Players.LocalPlayer
+	TweenTeleport(Player, Pos, tween_s, tweeninfo)
+end)
+Fruit.newButton("Bring Fruits", "Puxa as frutas spawnadas no mapa atualmente", function()
+    for _, tool in pairs(game.Workspace:GetDescendants()) do
+     if string.find(tool.name, "[EAT]") == true then
+       tool.Handle.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+     end
+    end
+end)
+
+
+Window:Toggle()
+end
+
+if game.PlaceId == 11918983084 then
+ TutasuFruit()
+else
+ ObbyBike()
+end
