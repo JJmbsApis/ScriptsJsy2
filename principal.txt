@@ -50,7 +50,7 @@ local tweeninfo = TweenInfo.new(25,Enum.EasingStyle.Linear)
 	
 while wait(0.1) do
 if _G.AutoFarmW1 == true then
-TweenTeleport(Player, Vector3.new(107, -3, -20964), tween_s, tweeninfo)
+TweenTeleport(Player, Vector3.new(107, 20, -20964), tween_s, tweeninfo)
 wait(26)
 game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvents"):WaitForChild("ReportReset"):FireServer()
 end
