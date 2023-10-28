@@ -48,15 +48,15 @@ _G.AutoFarmW1 = toggleState
 local tween_s = game:GetService('TweenService')
 local tweeninfo = TweenInfo.new(25,Enum.EasingStyle.Linear)
 	
-while wait(0.1) do
+while wait(5) do
 if _G.AutoFarmW1 == true then
-Player.Character:MoveTo(Vector3.new(107, 20, -20964))
+local char = Player.CharacterAdded:Wait() 
+char:MoveTo(Vector3.new(107, 20, -20964))
 wait(.1)
 game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvents"):WaitForChild("ReportReset"):FireServer()
 end
 end
 end)
-
 Window:Toggle()
 end
 local function TutasuFruit()
